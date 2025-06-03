@@ -3,7 +3,8 @@ class Cave:
         self.name = cave_name
         self.description = None
         self.linked_caves = {}
-    
+        self.character = None
+
     def set_description(self, cave_description):
         self.description = cave_description
 
@@ -36,3 +37,9 @@ class Cave:
         else:
             print("You can't go that way")
             return self
+
+    def set_character(self, character):
+        self.character = character
+
+    def get_character(self):
+        return self.character
