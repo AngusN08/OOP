@@ -50,3 +50,6 @@ class Friend(Character):
     
     def pat(self):
         print(self.name + " pats you back!")
+
+    def shake(self):
+        print(self.name + " shakes your hand.")

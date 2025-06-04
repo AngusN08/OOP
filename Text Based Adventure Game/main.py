@@ -18,7 +18,7 @@ grotto.link_cave(dungeon, "east")
 
 harry = Enemy("Harry", "A smelly Wumpus")
 harry.set_conversation("Hangry...Hanggrry")
-harry.set_weakness("Vegemite")
+harry.set_weakness("vegemite")
 dungeon.set_character(harry)
 josephine = Friend("Josephine", "A friendly bat")
 josephine.set_conversation("Gidday.")
@@ -33,8 +33,9 @@ while dead == False:
     if inhabitant is not None:
         inhabitant.describe()
     command = input("> ")
-    current_cave = current_cave.move(command)
-    if command == "talk":
+    if command in ["north", "south", "east", "west"]:
+        current_cave = current_cave.move(command)
+    elif command == "talk":
         if inhabitant is not None:
             inhabitant.talk()
     
@@ -48,6 +49,8 @@ while dead == False:
                 current_cave.set_character(None)
             else:
                 print("Scurry home, you lost the fight.")
+                print("That's the end of the game")
+                dead = True
         else:
             print("There is no one here to fight with")
 
@@ -59,3 +62,12 @@ while dead == False:
                 inhabitant.pat()
         else:
             print("There is no one here to pat:(")
+
+    elif command == "shake":
+        if inhabitant is not None:
+            if isinstance(inhabitant, Enemy):
+                print("I wouldn't do that if I were you...")
+            else:
+                inhabitant.shake()
+        else:
+            print("There is no one here to shake hands with:(")
