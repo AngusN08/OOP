@@ -1,6 +1,7 @@
 from character import Character
 from character import Enemy, Friend
 from cave import Cave
+from item import Item
 
 cavern = Cave("cavern")
 cavern.set_description("a dank and dirty cave")
@@ -23,6 +24,11 @@ dungeon.set_character(harry)
 josephine = Friend("Josephine", "A friendly bat")
 josephine.set_conversation("Gidday.")
 grotto.set_character(josephine)
+
+torch = Item("torch")
+torch.set_description("A light for the end of the tunnel")
+dungeon.set_item(torch)
+bag = []
 
 current_cave = cavern
 dead = False
@@ -71,3 +77,9 @@ while dead == False:
                 inhabitant.shake()
         else:
             print("There is no one here to shake hands with:(")
+
+    elif command == "take":
+        if item is not None:
+            print("You put the " + item.get_name() + " in your bag")
+            bag.append(item.get_name())
+            current_cave.set_item(None)
