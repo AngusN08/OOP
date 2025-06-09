@@ -25,10 +25,15 @@ josephine = Friend("Josephine", "A friendly bat")
 josephine.set_conversation("Gidday.")
 grotto.set_character(josephine)
 
+bag = []
 torch = Item("torch")
 torch.set_description("A light for the end of the tunnel")
 dungeon.set_item(torch)
-bag = []
+
+vegemite = Item("vegemite")
+vegemite.set_description("A Wumpus worst nightmare")
+grotto.set_item(vegemite)
+
 
 current_cave = cavern
 dead = False
@@ -50,13 +55,20 @@ while dead == False:
             
             print("What will you fight with?")
             fight_with = input()
-            if inhabitant.fight(fight_with) == True:
-                print("Bravo, hero you won the fight!")
-                current_cave.set_character(None)
+            if fight_with in bag:
+                if inhabitant.fight(fight_with) == True:
+                    print("Bravo, hero you won the fight!")
+                    current_cave.set_character(None)
+                    if Enemy.enemies_to_defeat == 0:
+                        print("Congratulations, you have survived another adventure!")
+                        dead = True
+                else:
+                    print("Scurry home, you lost the fight.")
+                    print("That's the end of the game")
+                    dead = True
+
             else:
-                print("Scurry home, you lost the fight.")
-                print("That's the end of the game")
-                dead = True
+                print("You don't have a " + fight_with)
         else:
             print("There is no one here to fight with")
 
