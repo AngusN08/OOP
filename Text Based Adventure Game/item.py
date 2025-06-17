@@ -17,5 +17,4 @@ class Item:
 
     def describe(self):
         print(
-            "The [" + self.name + "] is here - " + self.description
-        )
+            "The [" + self.name + "] is here - " + self.description)

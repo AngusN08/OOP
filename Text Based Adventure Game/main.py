@@ -43,6 +43,9 @@ while dead == False:
     inhabitant = current_cave.get_character()
     if inhabitant is not None:
         inhabitant.describe()
+    item = current_cave.get_item()
+    if item is not None:
+            item.describe()
     command = input("> ")
     if command in ["north", "south", "east", "west"]:
         current_cave = current_cave.move(command)
