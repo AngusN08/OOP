@@ -1,5 +1,4 @@
 import random
-
 from character import Character, Player, Suspect
 
 def main():
@@ -18,10 +17,17 @@ def main():
     print("Midnight Murder begins.")
     print("You can talk to any of the suspects.\n")
 
+def night_kill(suspects, player):
+    killer = next((i for i in suspects if s.is_killer), None)
+    if not killer:
+        return
+
+
     while True:
         print("\n Who do you want to interview?")
         for i, suspect in enumerate(suspects):
-            print(f"{i + 1}. {suspects[i].name}")
+            if suspect.is_alive:
+                print(f"{i + 1}. {suspects[i].name}")
         
         choice = input("> ")
 

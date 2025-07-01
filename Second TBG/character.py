@@ -1,7 +1,7 @@
 import random
 
 class Character:
-    def __init__ (self, name):
+    def __init__ (self, name, is_alive):
         self.name = name
         self.is_alive = True
 

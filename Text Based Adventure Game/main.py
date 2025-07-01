@@ -1,5 +1,4 @@
-from character import Character
-from character import Enemy, Friend
+from character import Enemy, Friend, Character
 from cave import Cave
 from item import Item
 
