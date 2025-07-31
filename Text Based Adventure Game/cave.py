@@ -30,8 +30,6 @@ class Cave:
             cave = self.linked_caves[direction]
             description = self.description
             print("The " + cave.get_name() + " is " + direction + " of " + self.name)
-        
-            
 
     def move(self, direction):
         if direction in self.linked_caves:
