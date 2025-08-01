@@ -1,8 +1,5 @@
 class Player:
-    def __init__(self, location, disguise_level, inventory=None):
-        if inventory is None:
-            inventory = []
-            self.location = location
+    def __init__(self, disguise_level, name):
             self.disguise_level = disguise_level
-            self.inventory = inventory
-
+            self.name = name
+        

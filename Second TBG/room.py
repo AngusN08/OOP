@@ -29,7 +29,7 @@ class Location:
         for direction in self.linked_rooms:
             room = self.linked_rooms[direction]
             description = self.description
-            print("The " + cave.get_name() + " is " + direction + " of " + self.name)
+            print("The " + room.get_name() + " is " + direction + " of " + self.name)
 
     def move(self, direction):
         if direction in self.linked_rooms:
@@ -37,3 +37,16 @@ class Location:
         else:
             print("You can't go that way.")
             return self
+
+    def set_character(self, character):
+        self.character = character
+    
+    def get_character(self):
+        return self.character
+
+    def set_item(self, item_name):
+        self.item = item_name
+
+    def get_item(self):
+        return self.item
+
