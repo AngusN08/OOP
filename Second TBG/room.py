@@ -1,4 +1,4 @@
-class Location:
+class Room:
     def __init__(self, room_name):
         self.name = room_name
         self.description = None
@@ -16,7 +16,7 @@ class Location:
         self.name = room_name
 
     def get_name(self):
-        print(self.description)
+        return self.name
 
     def describe(self):
         print(self.description)
