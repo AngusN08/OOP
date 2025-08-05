@@ -19,3 +19,6 @@ The_Wall.set_description("The barrier keeping citizens in and dangers out.")
 
 sleeping_quarters.link_room(markets, "west")
 markets.link_room(slums, "west")
+slums.link_room(The_Wall, "west")
+
+markus = Player("Markus", "A civilian who wants to escape the city.")
