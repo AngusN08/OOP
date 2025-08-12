@@ -14,11 +14,29 @@ slums = Room("Slums")
 slums.set_description("The dirtiest and poorest zone in the city. Very dangerous if unprepared.")
 
 #The last step for escape
-The_Wall = Room("The Wall")
-The_Wall.set_description("The barrier keeping citizens in and dangers out.")
+Wall = Room("The Wall")
+Wall.set_description("The barrier keeping citizens in and dangers out.")
 
 sleeping_quarters.link_room(markets, "west")
 markets.link_room(slums, "west")
-slums.link_room(The_Wall, "west")
+slums.link_room(Wall, "west")
+Wall.link_room(slums, "east")
+slums.link_room(markets, "east")
+markets.link_room(sleeping_quarters, "east")
 
-markus = Player("Markus", "A civilian who wants to escape the city.")
+markus = Player("Markus", "A civilian who wants to escape the city.", 0)
+
+current_room = sleeping_quarters
+discovered = False
+while discovered == False:
+    print("\n")
+    current_room.get_details()
+    # inhabitant = current_room.get_character()
+    # if inhabitant is not None:
+    #     inhabitant.describe()
+    # item = current_room.get_item()
+    # if item is not None:
+    #     item.describe()
+    command = input("> ")
+    if command in ["east", "west"]:
+        current_room = current_room.move(command)

@@ -22,7 +22,7 @@ class Room:
         print(self.description)
 
     def link_room(self, room_to_link, direction):
-        self.linked_room[direction] = room_to_link
+        self.linked_rooms[direction] = room_to_link
 
     def get_details(self):
         print("The " + self.name + " is " + self.description)
