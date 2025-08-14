@@ -1,5 +1,6 @@
 from character import *
-from room import Room
+from room import *
+from item import *
 
 #Center of city
 sleeping_quarters = Room("Sleeping Quarters")
@@ -42,6 +43,11 @@ The_Gatekeeper = NPC("The Gatekeeper", "An unblinking sentinel, recording your e
 The_Gatekeeper.set_conversation("Every step you take is logged; don't think the gate will forget you.")
 Wall.set_character(The_Gatekeeper)
 
+fake_id = Item("Fake ID", "A forged identification card.", disguise_bonus = 2, price = 5)
+stolen_uniform = Item("Stolen Guard Uniform", "A guard's uniform taken from the slums.", disguise_bonus = 4, price = 10)
+
+Jericho.set_shop_items([fake_id])
+Clara.stealable_item = stolen_uniform
 
 Markus.describe()
 current_room = sleeping_quarters
@@ -52,9 +58,6 @@ while discovered == False:
     inhabitant = current_room.get_character()
     if inhabitant is not None:
         inhabitant.describe()
-    # item = current_room.get_item()
-    # if item is not None:
-    #     item.describe()
     command = input("> ")
     if command in ["east", "west"]:
         current_room = current_room.move(command)
@@ -62,3 +65,19 @@ while discovered == False:
     elif command == "talk":
         if inhabitant is not None:
             inhabitant.talk(Markus)
+
+    elif command.startswith("buy "):
+        if inhabitant and inhabitant.shop_items:
+            try:
+                choice = int(command.split(" ")[1])
+                inhabitant.sell_item(Markus, choice)
+            except ValueError:
+                print("Please enter the number of the item you want to buy")
+        else:
+            print("There's nothing tp buy here.")
+
+    elif command == "steal":
+        if inhabitant and inhabitant.stealable_item:
+            inhabitant.steal_from(Markus)
+        else:
+            print("There's nothing to steal here.")
