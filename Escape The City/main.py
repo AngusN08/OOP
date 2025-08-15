@@ -45,11 +45,18 @@ Wall.set_character(The_Gatekeeper)
 
 fake_id = Item("Fake ID", "A forged identification card.", disguise_bonus = 2, price = 5)
 stolen_uniform = Item("Stolen Guard Uniform", "A guard's uniform taken from the slums.", disguise_bonus = 4, price = 10)
+old_watch = Item("Old Watch", "A rusty old watch, could hold some value.", price = 10)
+sleeping_quarters.set_item(old_watch)
+
+scrap_metal = Item("Scrap Metal", "A piece of scrap metal, you might be able to pawn it.", price = 3)
+slums.set_item(scrap_metal)
+
 
 Jericho.set_shop_items([fake_id])
 Clara.stealable_item = stolen_uniform
 
 Markus.describe()
+# Markus.inventory = []
 current_room = sleeping_quarters
 discovered = False
 while discovered == False:
@@ -74,10 +81,22 @@ while discovered == False:
             except ValueError:
                 print("Please enter the number of the item you want to buy")
         else:
-            print("There's nothing tp buy here.")
+            print("There's nothing to buy here.")
+
+    # elif command == "sell":
+
 
     elif command == "steal":
         if inhabitant and inhabitant.stealable_item:
             inhabitant.steal_from(Markus)
         else:
             print("There's nothing to steal here.")
+
+    elif command == "take":
+        item = current_room.get_item()
+        if item is not None:
+            Markus.pick_up(item)
+            current_room.set_item(None)
+            print(f"You pick up the {item.name}.")
+        else:
+            print("There's nothing to take here.")

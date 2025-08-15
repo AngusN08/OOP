@@ -1,7 +1,7 @@
 class Item:
     def __init__ (self, name, description, disguise_bonus = 0, price = 0):
         self.name = name
-        self. description = description
+        self.description = description
         self.disguise_bonus = disguise_bonus
         self.price = price
 

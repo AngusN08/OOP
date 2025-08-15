@@ -1,3 +1,5 @@
+from item import Item
+
 class Room:
     def __init__(self, room_name):
         self.name = room_name
@@ -26,6 +28,8 @@ class Room:
 
     def get_details(self):
         print("The " + self.name + " is " + self.description)
+        if self.item is not None:
+            print(f"You spot something on the ground: {self.item.name} -- {self.item.description}")
         for direction in self.linked_rooms:
             room = self.linked_rooms[direction]
             description = self.description

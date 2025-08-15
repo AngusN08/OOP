@@ -1,4 +1,5 @@
 import random
+from item import *
 class Character:
     def __init__(self, name, description):
             self.name = name
@@ -41,7 +42,6 @@ class Player(Character):
     def pick_up(self, item):
         self.inventory.append(item)
         self.disguise_level += item.disguise_bonus
-        print(f"You picked up {item.name}. Disguise level is now {self.disguise_level}.")
 
     def show_inventory(self):
         if not self.inventory:
@@ -102,3 +102,19 @@ class NPC(Character):
                 print("You don't have enough credits for that.")
         else:
             print("That item doesn't exist.")
+
+    def buy_from_player(self, player, item_name):
+        item_to_sell = None
+        for item in player.inventory:
+            if item.name == item_name:
+                item_to_sell = item
+                break
+
+        if not item_to_sell:
+            print(f"You don't have {item_name}.")
+            return
+
+        player.money += item_to_sell.price
+        player.inventory.remove(item_to_sell)
+        player.disguise_level = max(0, player.disguise_level - item_to_sell.disguise_bonus)
+        print(f"You sold {item_to_sell.name} for {item_to_sell.price} credits. You now have {player.money} credits.")
