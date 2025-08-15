@@ -116,5 +116,4 @@ class NPC(Character):
 
         player.money += item_to_sell.price
         player.inventory.remove(item_to_sell)
-        player.disguise_level = max(0, player.disguise_level - item_to_sell.disguise_bonus)
         print(f"You sold {item_to_sell.name} for {item_to_sell.price} credits. You now have {player.money} credits.")

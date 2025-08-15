@@ -56,7 +56,6 @@ Jericho.set_shop_items([fake_id])
 Clara.stealable_item = stolen_uniform
 
 Markus.describe()
-# Markus.inventory = []
 current_room = sleeping_quarters
 discovered = False
 while discovered == False:
@@ -83,8 +82,23 @@ while discovered == False:
         else:
             print("There's nothing to buy here.")
 
-    # elif command == "sell":
-
+    elif command == "sell":
+        if Markus.inventory:
+            print("\n Your inventory:")
+            for idx, item in enumerate(Markus.inventory, start=1):
+                print(f"{idx}. {item.name} - {item.price} credits")
+            choice = input("Enter the number of the item you want to sell: ")
+            try:
+                choice_num = int(choice)
+                if 1 <= choice_num <= len(Markus.inventory):
+                    item_name = Markus.inventory[choice_num - 1].name
+                    Jericho.buy_from_player(Markus, item_name)
+                else:
+                    print("Invalid choice.")
+            except ValueError:
+                print("Please enter a valid number.")
+        else:
+            print("You have nothing to sell.")
 
     elif command == "steal":
         if inhabitant and inhabitant.stealable_item:
