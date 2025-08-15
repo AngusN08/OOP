@@ -49,4 +49,3 @@ class Room:
 
     def get_item(self):
         return self.item
-
