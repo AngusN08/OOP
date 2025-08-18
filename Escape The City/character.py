@@ -22,7 +22,7 @@ class Character:
             return "discovered"
 
 class Player(Character):
-    def __init__(self, name, description, disguise_level = 0, money = 10):
+    def __init__(self, name, description, disguise_level = 0, money = 0):
         super().__init__(name, description)
         self.disguise_level = disguise_level
         self.money = money
