@@ -19,6 +19,7 @@ class Character:
             print(f"{self.name} narrows their eyes but says: '{self.conversation}'")
         else:
             print(f"{self.name} immediately notices you and raises the alarm!")
+            return "discovered"
 
 class Player(Character):
     def __init__(self, name, description, disguise_level = 0, money = 10):
@@ -83,7 +84,7 @@ class NPC(Character):
 
     def talk(self, player):
         if self.shop_items:
-            print(f"{self.name}: Interested in buying something>")
+            print(f"{self.name}: Interested in buying something?")
             for idx, item in enumerate(self.shop_items, start = 1):
                 print(f"{idx}. {item.name} - {item.disguise_bonus} disguise bonus - {item.price} credits")
 

@@ -57,8 +57,10 @@ Clara.stealable_item = stolen_uniform
 
 Markus.describe()
 current_room = sleeping_quarters
-discovered = False
-while discovered == False:
+game_over = False
+
+
+while not game_over:
     print("\n")
     current_room.get_details()
     inhabitant = current_room.get_character()
@@ -70,7 +72,20 @@ while discovered == False:
 
     elif command == "talk":
         if inhabitant is not None:
-            inhabitant.talk(Markus)
+            result = inhabitant.talk(Markus)
+            
+            if inhabitant == The_Gatekeeper and Markus.disguise_level >= 6:
+                print("The Gatekeeper scans you... and lets you through the gate.")
+                print("You slip past the Wall into freedom.")
+                print("YOU WIN!")
+                game_over = True
+                break
+            
+            if result == "discovered":
+                print("You've been caught! Guards swarm in and drag you away.")
+                print("Game Over.")
+                game_over = True
+                break
 
     elif command.startswith("buy "):
         if inhabitant and inhabitant.shop_items:
