@@ -1,3 +1,4 @@
+# No changes needed in character.py based on the instructions. Outputting the original file as is.
 import random
 from item import *
 class Character:

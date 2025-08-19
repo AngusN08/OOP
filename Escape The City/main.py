@@ -45,7 +45,7 @@ Wall.set_character(The_Gatekeeper)
 
 fake_id = Item("Fake ID", "A forged identification card.", disguise_bonus = 2, price = 5)
 stolen_uniform = Item("Stolen Guard Uniform", "A guard's uniform taken from the slums.", disguise_bonus = 4, price = 10)
-old_watch = Item("Old Watch", "A rusty old watch, could hold some value.", price = 10)
+old_watch = Item("Old Watch", "A rusty old watch, could hold some value.", price = 3)
 sleeping_quarters.set_item(old_watch)
 
 scrap_metal = Item("Scrap Metal", "A piece of scrap metal, you might be able to pawn it.", price = 3)
@@ -81,6 +81,14 @@ while not game_over:
                 game_over = True
                 break
             
+            elif inhabitant == The_Gatekeeper and Markus.money >= 15:
+                print("The Gatekeeper eyes your credits and silently accepts your bribe.")
+                print("He steps aside, and you pass through the gate into freedom.")
+                print("YOU WIN (but at a price)!")
+                Markus.money -= 15
+                game_over = True
+                break
+            
             if result == "discovered":
                 print("You've been caught! Guards swarm in and drag you away.")
                 print("Game Over.")
@@ -89,10 +97,11 @@ while not game_over:
 
     elif command.startswith("buy "):
         if inhabitant and inhabitant.shop_items:
-            try:
-                choice = int(command.split(" ")[1])
+            parts = command.split(" ")
+            if len(parts) > 1 and parts[1].isdigit():
+                choice = int(parts[1])
                 inhabitant.sell_item(Markus, choice)
-            except ValueError:
+            else:
                 print("Please enter the number of the item you want to buy")
         else:
             print("There's nothing to buy here.")
@@ -103,14 +112,14 @@ while not game_over:
             for idx, item in enumerate(Markus.inventory, start=1):
                 print(f"{idx}. {item.name} - {item.price} credits")
             choice = input("Enter the number of the item you want to sell: ")
-            try:
+            if choice.isdigit():
                 choice_num = int(choice)
                 if 1 <= choice_num <= len(Markus.inventory):
                     item_name = Markus.inventory[choice_num - 1].name
                     Jericho.buy_from_player(Markus, item_name)
                 else:
                     print("Invalid choice.")
-            except ValueError:
+            else:
                 print("Please enter a valid number.")
         else:
             print("You have nothing to sell.")
@@ -129,3 +138,25 @@ while not game_over:
             print(f"You pick up the {item.name}.")
         else:
             print("There's nothing to take here.")
+
+
+    elif command == "status":
+        print(f"Disguise Level: {Markus.disguise_level}")
+        print(f"Money: {Markus.money} credits")
+        if Markus.inventory:
+            print("Inventory:")
+            for item in Markus.inventory:
+                print(f"- {item.name}: {item.description} (Disguise +{item.disguise_bonus}, {item.price} credits)")
+        else:
+            print("Inventory is empty.")
+
+    elif command == "help":
+        print("Available commands:")
+        print("- east / west: Move between rooms")
+        print("- talk: Talk to the character in the room")
+        print("- buy <number>: Buy an item from a shopkeeper")
+        print("- sell: Sell an item to Jericho")
+        print("- steal: Attempt to steal from the NPC")
+        print("- take: Pick up an item in the room")
+        print("- status: View disguise level, money, and inventory")
+        print("- help: Show this help message")
