@@ -45,10 +45,10 @@ Wall.set_character(The_Gatekeeper)
 
 fake_id = Item("Fake ID", "A forged identification card.", disguise_bonus = 2, price = 5)
 stolen_uniform = Item("Stolen Guard Uniform", "A guard's uniform taken from the slums.", disguise_bonus = 4, price = 10)
-old_watch = Item("Old Watch", "A rusty old watch, could hold some value.", price = 3)
+old_watch = Item("Old Watch", "A rusty old watch, could hold some value.", price = 10)
 sleeping_quarters.set_item(old_watch)
 
-scrap_metal = Item("Scrap Metal", "A piece of scrap metal, you might be able to pawn it.", price = 3)
+scrap_metal = Item("Scrap Metal", "A piece of scrap metal, you might be able to pawn it.", price = 5)
 slums.set_item(scrap_metal)
 
 
