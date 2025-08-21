@@ -12,15 +12,6 @@ class Character:
     def set_conversation(self, conversation):
         self.conversation = conversation
 
-    def talk(self, player):
-        if player.disguise_level >= 5:
-            print(f"{self.name} looks at you suspiciously but lets you pass.")
-        elif player.disguise_level >= 2:
-            print(f"{self.name} narrows their eyes but says: '{self.conversation}'")
-        else:
-            print(f"{self.name} immediately notices you and raises the alarm!")
-            return "discovered"
-
 class Player(Character):
     def __init__(self, name, description, disguise_level = 0, money = 0):
         super().__init__(name, description)
