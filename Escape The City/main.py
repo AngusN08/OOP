@@ -35,9 +35,9 @@ Jericho = NPC("Jericho", "A wise and mysterious man who dwells in the shadows.")
 Jericho.set_conversation("The market thrives on what’s seen—and on what’s hidden in plain sight")
 markets.set_character(Jericho)
 
-Clara = NPC("Clara", "The elder in the slums, overflowing with useful knowledge")
-Clara.set_conversation("The slums will eat you alive if you don't know where to step.")
-slums.set_character(Clara)
+Kara = NPC("Kara", "The elder in the slums, overflowing with useful knowledge")
+Kara.set_conversation("The slums will eat you alive if you don't know where to step.")
+slums.set_character(Kara)
 
 The_Gatekeeper = NPC("The Gatekeeper", "An unblinking sentinel, recording your every move.")
 The_Gatekeeper.set_conversation("Every step you take is logged; don't think the gate will forget you.")
@@ -53,7 +53,7 @@ slums.set_item(scrap_metal)
 
 
 Jericho.set_shop_items([fake_id])
-Clara.stealable_item = stolen_uniform
+Kara.stealable_item = stolen_uniform
 
 Markus.describe()
 current_room = sleeping_quarters
